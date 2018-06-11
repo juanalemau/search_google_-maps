@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
+            <label for="labelRubro">Rubros:</label>
+            <select class="form-control form-control-lg" [(ngModel)]="selectRubro" (ngModelChange)="selectRubroChange($event)">            
+                <option *ngFor="let rubro of rubros" [ngValue]="rubro.codigoRubro">{{rubro.nombre}}</option>
+            </select>
+        </div>
+        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
+            <label for="labelDistrito">Distritos:</label>
+                <select class="form-control form-control-lg" [(ngModel)]="selectDistrito" (ngModelChange)="selectDistritoChange($event)">            
+                    <option *ngFor="let distrito of distritos" [ngValue]="distrito.codigoDistrito">{{distrito.nombre}}</option>
+                </select>
+        </div>
+        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
+            <label for="labelEstablecimiento">Establecimientos:</label>
+            <select class="form-control form-control-lg" [(ngModel)]="selectEstablecimiento" (ngModelChange)="selectEstablecimientoChange($event)">            
+                <option *ngFor="let establecimiento of establecimientos | filteEstablecimiento:selectDistrito:selectRubro" [ngValue]="establecimiento.latitud + '/' + establecimiento.longitud">{{establecimiento.nombre}}</option>
+            </select>
+        </div>
+        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
+            <label for="labelDistancia">Distancia:</label>
+            <nouislider [config]="someRange2config" [limit]="50" [(ngModel)]="someRange2" [tooltips]="[ true, true ]" style="margin-bottom: 3rem !important;"  (ngModelChange)="changeSlide($event)"></nouislider>
+        </div>
+
+        <div>
+            <pre>{{someRange2}}</pre>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+        <div class="col"></div>
+        <div class="col">
+            <agm-map 
+                [latitude]="lat"
+                [longitude]="lng"
+                [zoom]="zoom"
+                [disableDefaultUI]="false"
+                [zoomControl]="false"
+                (mapClick)="mapClicked($event)">
+              
+                <agm-marker 
+                    *ngFor="let establecimiento of establecimientos | filteEstablecimiento:selectDistrito:selectRubro; let i = index"
+                    (markerClick)="clickedMarker(establecimiento.nombre, i)"
+                    [latitude]="establecimiento.latitud"
+                    [longitude]="establecimiento.longitud"
+                    [markerDraggable]="establecimiento.draggable"
+                    (dragEnd)="markerDragEnd(establecimiento, $event)">
+                    
+                   <agm-info-window>
+                    <strong>{{establecimiento.nombre}}</strong>
+                  </agm-info-window> 
+                  
+                </agm-marker>
+                
+                 <agm-circle [latitude]="lat" [longitude]="lng" 
+                    [radius]="slideRange"
+                    [fillColor]="'red'"
+                    [circleDraggable]="false"
+                    [editable]="false">
+                </agm-circle>
+                
+              
+            </agm-map>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
