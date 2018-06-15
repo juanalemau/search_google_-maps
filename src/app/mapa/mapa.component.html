@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
+        <!-- <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
             <label for="labelRubro">Rubros:</label>
             <select class="form-control form-control-lg" [(ngModel)]="selectRubro" (ngModelChange)="selectRubroChange($event)">            
                 <option *ngFor="let rubro of rubros" [ngValue]="rubro.codigoRubro">{{rubro.nombre}}</option>
@@ -11,11 +11,11 @@
                 <select class="form-control form-control-lg" [(ngModel)]="selectDistrito" (ngModelChange)="selectDistritoChange($event)">            
                     <option *ngFor="let distrito of distritos" [ngValue]="distrito.codigoDistrito">{{distrito.nombre}}</option>
                 </select>
-        </div>
+        </div> -->
         <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
             <label for="labelEstablecimiento">Establecimientos:</label>
             <select class="form-control form-control-lg" [(ngModel)]="selectEstablecimiento" (ngModelChange)="selectEstablecimientoChange($event)">            
-                <option *ngFor="let establecimiento of establecimientos | filteEstablecimiento:selectDistrito:selectRubro" [ngValue]="establecimiento.latitud + '/' + establecimiento.longitud">{{establecimiento.nombre}}</option>
+                <option *ngFor="let establecimiento of establecimientos" [ngValue]="establecimiento.id">{{establecimiento.nombre}}</option>
             </select>
         </div>
         <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
