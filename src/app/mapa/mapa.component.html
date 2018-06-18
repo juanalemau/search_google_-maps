@@ -15,19 +15,72 @@
         <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
             <label for="labelEstablecimiento">Establecimientos:</label>
             <select class="form-control form-control-lg" [(ngModel)]="selectEstablecimiento" (ngModelChange)="selectEstablecimientoChange($event)">            
-                <option *ngFor="let establecimiento of establecimientos" [ngValue]="establecimiento.id">{{establecimiento.nombre}}</option>
+                <option *ngFor="let establecimiento of establecimientos" [ngValue]="establecimiento.id">{{establecimiento.name}}</option>
             </select>
         </div>
-        <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
-            <label for="labelDistancia">Distancia:</label>
-            <nouislider [config]="someRange2config" [limit]="50" [(ngModel)]="someRange2" [tooltips]="[ true, true ]" style="margin-bottom: 3rem !important;"  (ngModelChange)="changeSlide($event)"></nouislider>
+        <div class="row" style="width: 100%">
+            <div class="col-sm-6">
+                <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
+                    <label for="labelDistancia">Distancia:</label>
+                    <nouislider  [config]="someRange_distance"  [(ngModel)]="range_distance" style="margin-bottom: 3rem !important;"></nouislider>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
+                    <label for="labelSimilarity">Similaridad:</label>
+                     <nouislider [config]="someRange_similarity" [(ngModel)]="range_similarity"  style="margin-bottom: 3rem !important;"></nouislider>
+                </div>
+            </div>
         </div>
-
-        <div>
-            <pre>{{someRange2}}</pre>
+        <div class="row">
+            <div style="margin-left: 10px;">
+                <button type="button" class="btn btn-primary" style=" width: 150px;height: 50px;">Enviar</button>
+            </div> 
         </div>
     </div>
-    <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
+    <div class="row" style="margin-top: 40px;">
+        <table class="table">
+            <thead>
+                <tr class="table-primary">
+                    <th scope="col">#</th>
+                    <th scope="col">Establecimientos</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Distrito</th>
+                </tr>
+            </thead>
+           <tbody>
+                <tr *ngFor="let estableciminetos_list of estableciminetos_response; let i = index">
+                    <th scope="row">{{i}}</th>
+                    <td>{{estableciminetos_list.name}}</td>
+                    <td>{{estableciminetos_list.department}}</td>
+                    <td>{{estableciminetos_list.department}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" style="margin-top: 40px">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="table-primary">Numero de Competidores</th>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th colspan="2" class="table-primary">Ticket Promedio</th>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th colspan="2" class="table-primary">Monto Total</th>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th colspan="2" class="table-primary">Monto Trx</th>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
         <div class="col"></div>
         <div class="col">
             <agm-map 
@@ -39,7 +92,7 @@
                 (mapClick)="mapClicked($event)">
               
                 <agm-marker 
-                    *ngFor="let establecimiento of establecimientos | filteEstablecimiento:selectDistrito:selectRubro; let i = index"
+                    *ngFor="let establecimiento of establecimientos"
                     (markerClick)="clickedMarker(establecimiento.nombre, i)"
                     [latitude]="establecimiento.latitud"
                     [longitude]="establecimiento.longitud"
@@ -63,5 +116,5 @@
             </agm-map>
         </div>
         <div class="col"></div>
-    </div>
+    </div> -->
 </div>
