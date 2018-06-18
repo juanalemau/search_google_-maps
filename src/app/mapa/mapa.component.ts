@@ -21,6 +21,7 @@ export class MapaComponent implements OnInit {
   lng: number =  -77.0282400;
 
   // Establecimiento
+  establecimientos: any;
 
   // Rango en distancia
   range_distance: any;
@@ -68,14 +69,14 @@ export class MapaComponent implements OnInit {
   constructor(private service: MapaServiceService) {}
 
   ngOnInit() {
-    //this.service.getEstableshment().subscribe(datas => console.log(datas))
+    this.service.getEstableshment().subscribe(data => this.establecimientos = data);
   }
 
 
   selectEstablecimientoChange(event){
   }
 
-  establecimientos: establecimientos[] = [
+  /* establecimientos: establecimientos[] = [
     {
       id: "548700501",
       name: "PARRILLADAS EL HORNERO__BARRANCO",
@@ -115,7 +116,7 @@ export class MapaComponent implements OnInit {
         latitude: -12.12816073,
         longitude: -77.02614336
     }
-  ];
+  ];*/
 
   estableciminetos_response: establecimiento_response[] = [
     {
@@ -174,7 +175,7 @@ export class MapaComponent implements OnInit {
 
 }
 
-interface establecimientos {
+/* interface establecimientos {
   id: string,
   name: string,
   category: string,
@@ -186,7 +187,7 @@ interface establecimientos {
   averageTicket: number,
   latitude: number,
   longitude: number
-}
+}*/
 
 interface establecimiento_response {
   id: string,

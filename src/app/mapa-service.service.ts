@@ -11,6 +11,6 @@ export class MapaServiceService {
   constructor(public _http: Http) { }
 
   getEstableshment(){
-    return this._http.get('http://localhost:8080/establishments').pipe(map(data => {}));
+    return this._http.get('http://localhost:8080/establishments').pipe(map(Response => Response.json()));
   }
 }

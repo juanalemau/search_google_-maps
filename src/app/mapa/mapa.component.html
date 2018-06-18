@@ -44,16 +44,16 @@
                 <tr class="table-primary">
                     <th scope="col">#</th>
                     <th scope="col">Establecimientos</th>
-                    <th scope="col">Nombre</th>
                     <th scope="col">Distrito</th>
+                    <th scope="col">Numero de Ticket</th>
                 </tr>
             </thead>
            <tbody>
                 <tr *ngFor="let estableciminetos_list of estableciminetos_response; let i = index">
                     <th scope="row">{{i}}</th>
                     <td>{{estableciminetos_list.name}}</td>
-                    <td>{{estableciminetos_list.department}}</td>
-                    <td>{{estableciminetos_list.department}}</td>
+                    <td>{{estableciminetos_list.district}}</td>
+                    <td>{{estableciminetos_list.averageTicket}}</td>
                 </tr>
             </tbody>
         </table>
