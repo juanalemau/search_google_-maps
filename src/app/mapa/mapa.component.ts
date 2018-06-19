@@ -120,7 +120,7 @@ export class MapaComponent implements OnInit {
       });
       this.totalAmount = arrayTotalAmount.reduce((a,b) => a+b, 0);
       this.totalTransaction = arrayTotalTrx.reduce((a,b) => a+b, 0);
-      this.total_average_ticket = arrayTotalAverageTicket.reduce((a,b) => a+b, 0);
+      this.total_average_ticket = this.totalAmount / this.totalTransaction;
       this.activeTableMap = true;
     });
 

@@ -85,15 +85,16 @@
                     </tr>
                     <tr>
                         <th colspan="2" class="table-primary">Ticket Promedio</th>
-                        <td>{{totalAmount}}</td>
+                        <td>{{total_average_ticket}}</td>
+                        
                     </tr>
                     <tr>
                         <th colspan="2" class="table-primary">Monto Total</th>
-                        <td>{{totalTransaction}}</td>
+                        <td>{{totalAmount}}</td>
                     </tr>
                     <tr>
-                        <th colspan="2" class="table-primary">Monto Trx</th>
-                        <td>{{total_average_ticket}}</td>
+                        <th colspan="2" class="table-primary">Monto Transaccion</th>
+                        <td>{{totalTransaction}}</td>
                     </tr>
                </tbody>
             </table>
@@ -110,7 +111,7 @@
                 </thead>
             <tbody>
                     <tr *ngFor="let estableciminetos_list of establecimiento_response; let i = index">
-                        <th scope="row">{{i}}</th>
+                        <th scope="row">{{i + 1}}</th>
                         <td>{{estableciminetos_list.name}}</td>
                         <td>{{estableciminetos_list.district}}</td>
                         <td>{{estableciminetos_list.averageTicket}}</td>
