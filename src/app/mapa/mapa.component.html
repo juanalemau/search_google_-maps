@@ -15,7 +15,7 @@
         <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;">
             <label for="labelEstablecimiento">Establecimientos:</label>
             <select class="form-control form-control-lg" [(ngModel)]="selectEstablecimiento" (ngModelChange)="selectEstablecimientoChange($event)">            
-                <option *ngFor="let establecimiento of establecimientos" [ngValue]="establecimiento.id">{{establecimiento.name}}</option>
+                <option *ngFor="let establecimiento of establecimientos" [ngValue]="establecimiento.id">{{establecimiento.nameCombo}}</option>
             </select>
         </div>
         <div class="row" style="width: 100%">
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
             <div style="margin-left: 10px;">
-                <button type="button" class="btn btn-primary" style=" width: 150px;height: 50px;">Enviar</button>
+                <button type="button" class="btn btn-primary" style=" width: 150px;height: 50px;" (click)="searchMap()">Enviar</button>
             </div> 
         </div>
     </div>
@@ -49,7 +49,7 @@
                 </tr>
             </thead>
            <tbody>
-                <tr *ngFor="let estableciminetos_list of estableciminetos_response; let i = index">
+                <tr *ngFor="let estableciminetos_list of establecimiento_response; let i = index">
                     <th scope="row">{{i}}</th>
                     <td>{{estableciminetos_list.name}}</td>
                     <td>{{estableciminetos_list.district}}</td>
@@ -63,19 +63,19 @@
             <tbody>
                 <tr>
                     <th colspan="2" class="table-primary">Numero de Competidores</th>
-                    <td>10</td>
+                    <td>{{totalNumberOfCompetitor}}</td>
                 </tr>
                 <tr>
                     <th colspan="2" class="table-primary">Ticket Promedio</th>
-                    <td>10</td>
+                    <td>{{totalAmount}}</td>
                 </tr>
                 <tr>
                     <th colspan="2" class="table-primary">Monto Total</th>
-                    <td>10</td>
+                    <td>{{totalTransaction}}</td>
                 </tr>
                 <tr>
                     <th colspan="2" class="table-primary">Monto Trx</th>
-                    <td>10</td>
+                    <td>{{total_average_ticket}}</td>
                 </tr>
             </tbody>
         </table>

@@ -65,6 +65,14 @@ export class MapaComponent implements OnInit {
 
   // Establecimiento 
   selectEstablecimiento: string = "548700501";
+  establecimiento_response: any;
+
+  // Montos de Establecimiento
+  totalNumberOfCompetitor: any;
+  totalAmount: any;
+  totalTransaction: any;
+  total_average_ticket: any;
+
 
   constructor(private service: MapaServiceService) {}
 
@@ -72,133 +80,37 @@ export class MapaComponent implements OnInit {
     this.service.getEstableshment().subscribe(data => this.establecimientos = data);
   }
 
+  
 
   selectEstablecimientoChange(event){
   }
 
-  /* establecimientos: establecimientos[] = [
-    {
-      id: "548700501",
-      name: "PARRILLADAS EL HORNERO__BARRANCO",
-      category: "RESTAURANTES",
-      department: "LIMA",
-      province: "LIMA",
-      district: "BARRANCO",
-      totalTransaction: 11722,
-      totalAmount: 3010266.5,
-      averageTicket: 183.5400095,
-      latitude: -12.133824,
-      longitude: -77.020061
-    },
-    {
-        id: "511404702",
-        name: "VIEJO FUNDO__BARRANCO",
-        category: "RESTAURANTES",
-        department: "LIMA",
-        province: "LIMA",
-        district: "BARRANCO",
-        totalTransaction: 5785,
-        totalAmount: 963617.7,
-        averageTicket: 131.1116267,
-        latitude: -12.1397275,
-        longitude: -77.01789663
-    },
-    {
-        id: "510670601",
-        name: "EL PARRILLON__MIRAFLORES",
-        category: "RESTAURANTES",
-        department: "LIMA",
-        province: "LIMA",
-        district: "MIRAFLORES",
-        totalTransaction: 2863,
-        totalAmount: 682984.51,
-        averageTicket: 189.1283023,
-        latitude: -12.12816073,
-        longitude: -77.02614336
-    }
-  ];*/
+  searchMap(){
+    let responseEstableshment = {
+      establishment: this.selectEstablecimiento,
+      distance: this.range_distance,
+      score: this.range_similarity
+    };
 
-  estableciminetos_response: establecimiento_response[] = [
-    {
-      id: "302629028",
-      name: "BOTICAS BTL__COMAS",
-      category: "FARMACIA",
-      department: "",
-      province: "",
-      district: "",
-      totalTransaction: 1986,
-      totalAmount: 116047.87,
-      averageTicket: 36.74805664,
-      latitude: -11.93353098,
-      longitude: -77.04726451
-    },
-    {
-      id: "302629416",
-      name: "BTL111 COMAS4B DELIVERY__COMAS",
-      category: "FARMACIA",
-      department: "",
-      province: "",
-      district: "",
-      totalTransaction: 434,
-      totalAmount: 37732.35,
-      averageTicket: 60.41824915,
-      latitude: -11.9415252,
-      longitude: -77.06233726
-    },
-    {
-      id: "305354105",
-      name: "FASA SANTA LUZMILA__COMAS",
-      category: "FARMACIA",
-      department: "",
-      province: "",
-      district: "",
-      totalTransaction: 2428,
-      totalAmount: 123138.32,
-      averageTicket: 34.0042448,
-      latitude: -11.94160897,
-      longitude: -77.06187356
-    },
-    {
-      id: "331060135",
-      name: "INKAFARMA SAN FELIPE 4 DV__CARABAYLLO",
-      category: "FARMACIA",
-      department: "",
-      province: "",
-      district: "",
-      totalTransaction: 337,
-      totalAmount: 23302.97,
-      averageTicket: 48.10458299,
-      latitude: -11.89842268,
-      longitude: -77.03810014
-    }
-  ]
+    this.service.postEstableshment(responseEstableshment)
+    .subscribe(data => {
+      this.establecimiento_response = data;
+      this.totalNumberOfCompetitor = this.establecimiento_response.length;
+      let arrayTotalAmount = [],
+        arrayTotalTrx = [],
+        arrayTotalAverageTicket = [];
 
-}
+      this.establecimiento_response.forEach(function(value){
+        arrayTotalAmount.push(value.totalAmount);
+        arrayTotalTrx.push(value.totalTransaction);
+        arrayTotalAverageTicket.push(value.averageTicket);
+      });
+      this.totalAmount = arrayTotalAmount.reduce((a,b) => a+b, 0);
+      this.totalTransaction = arrayTotalTrx.reduce((a,b) => a+b, 0);
+      this.total_average_ticket = arrayTotalAverageTicket.reduce((a,b) => a+b, 0);
+    });
 
-/* interface establecimientos {
-  id: string,
-  name: string,
-  category: string,
-  department: string,
-  province: string,
-  district: string,
-  totalTransaction: number,
-  totalAmount: number,
-  averageTicket: number,
-  latitude: number,
-  longitude: number
-}*/
+    
+  }
 
-interface establecimiento_response {
-  id: string,
-  name: string,
-  category: string,
-  department: string,
-  province: string,
-  district: string,
-  totalTransaction: number,
-  totalAmount: number,
-  averageTicket: number,
-  latitude: number,
-  longitude: number
 }

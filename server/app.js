@@ -151,6 +151,110 @@ app.get('/establishments', function (req, res) {
 ));
 });
 
+app.post('/find/establishment', function(req, res) {
+    res.send(JSON.stringify(
+        [
+            {
+                "id": "302629028",
+                "name": "BOTICAS BTL",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 1986,
+                "totalAmount": 116047.87,
+                "averageTicket": 36.75,
+                "latitude": -11.93353098,
+                "longitude": -77.04726451,
+                "nameCombo": "BOTICAS BTL - COMAS - 36.75"
+            },
+            {
+                "id": "302629416",
+                "name": "BTL111 COMAS4B DELIVERY",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 434,
+                "totalAmount": 37732.35,
+                "averageTicket": 60.42,
+                "latitude": -11.9415252,
+                "longitude": -77.06233726,
+                "nameCombo": "BTL111 COMAS4B DELIVERY - COMAS - 60.42"
+            },
+            {
+                "id": "305354105",
+                "name": "FASA SANTA LUZMILA",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 2428,
+                "totalAmount": 123138.32,
+                "averageTicket": 34,
+                "latitude": -11.94160897,
+                "longitude": -77.06187356,
+                "nameCombo": "FASA SANTA LUZMILA - COMAS - 34.0"
+            },
+            {
+                "id": "331060135",
+                "name": "INKAFARMA SAN FELIPE 4 DV",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "CARABAYLLO",
+                "totalTransaction": 337,
+                "totalAmount": 23302.97,
+                "averageTicket": 48.1,
+                "latitude": -11.89842268,
+                "longitude": -77.03810014,
+                "nameCombo": "INKAFARMA SAN FELIPE 4 DV - CARABAYLLO - 48.1"
+            },
+            {
+                "id": "331066278",
+                "name": "INKAFARMA SANTA LUZMILA",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 2268,
+                "totalAmount": 114935.32,
+                "averageTicket": 32.76,
+                "latitude": -11.94377633,
+                "longitude": -77.05859237,
+                "nameCombo": "INKAFARMA SANTA LUZMILA - COMAS - 32.76"
+            },
+            {
+                "id": "384891068",
+                "name": "BOTICAS Y SALUD COMAS DV",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 228,
+                "totalAmount": 31480.51,
+                "averageTicket": 67.39,
+                "latitude": -11.95611984,
+                "longitude": -77.05278365,
+                "nameCombo": "BOTICAS Y SALUD COMAS DV - COMAS - 67.39"
+            },
+            {
+                "id": "418140094",
+                "name": "BOTICAS ARCANGEL COMAS 4",
+                "category": "FARMACIAS",
+                "department": "",
+                "province": "",
+                "district": "COMAS",
+                "totalTransaction": 1039,
+                "totalAmount": 43759.22,
+                "averageTicket": 28.95,
+                "latitude": -11.94086224,
+                "longitude": -77.05013875,
+                "nameCombo": "BOTICAS ARCANGEL COMAS 4 - COMAS - 28.95"
+            }
+        ]        
+    ));
+});
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!');
 });
