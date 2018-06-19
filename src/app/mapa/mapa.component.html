@@ -22,7 +22,7 @@
             <div class="col-sm-6">
                 <div class="form-control" style="margin-top: 10px;margin-bottom: 10px;"> 
                     <label for="labelDistancia">Distancia:</label>
-                    <nouislider  [config]="someRange_distance"  [(ngModel)]="range_distance" style="margin-bottom: 3rem !important;"></nouislider>
+                    <nouislider  [config]="someRange_distance"  (ngModelChange)="changeSlide($event)" [(ngModel)]="range_distance" style="margin-bottom: 3rem !important;"></nouislider>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -38,67 +38,47 @@
             </div> 
         </div>
     </div>
-    <!-- <div class="row" style="margin-top: 10px;margin-bottom: 10px;">
-        <div class="col"></div>
-        <div class="col">
-            <agm-map 
-                [latitude]="lat"
-                [longitude]="lng"
-                [zoom]="zoom"
-                [disableDefaultUI]="false"
-                [zoomControl]="false"
-                (mapClick)="mapClicked($event)">
-              
-              <agm-marker 
-                    *ngFor="let establecimiento of establecimientos"
-                    (markerClick)="clickedMarker(establecimiento.nombre, i)"
-                    [latitude]="establecimiento.latitud"
-                    [longitude]="establecimiento.longitud"
-                    [markerDraggable]="establecimiento.draggable"
-                    (dragEnd)="markerDragEnd(establecimiento, $event)">
-                    
-                   <agm-info-window>
-                    <strong>{{establecimiento.nombre}}</strong>
-                  </agm-info-window> 
-                  
-                </agm-marker>
-                
-                <agm-circle [latitude]="lat" [longitude]="lng" 
-                    [radius]="slideRange"
-                    [fillColor]="'red'"
-                    [circleDraggable]="false"
-                    [editable]="false">
-                </agm-circle> 
-                
-              
-            </agm-map>
-        </div>
-        <div class="col"></div>
-    </div>-->
+   
     <div *ngIf="activeTableMap">
-        <div class="row" style="margin-top: 40px;">
-            <table class="table">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">#</th>
-                        <th scope="col">Establecimientos</th>
-                        <th scope="col">Distrito</th>
-                        <th scope="col">Numero de Ticket</th>
-                    </tr>
-                </thead>
-            <tbody>
-                    <tr *ngFor="let estableciminetos_list of establecimiento_response; let i = index">
-                        <th scope="row">{{i}}</th>
-                        <td>{{estableciminetos_list.name}}</td>
-                        <td>{{estableciminetos_list.district}}</td>
-                        <td>{{estableciminetos_list.averageTicket}}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="row" style="margin-top: 40px;margin-bottom: 40px;">
+            <div class="col"></div>
+            <div class="col">
+                <agm-map 
+                    [latitude]="latCenter"
+                    [longitude]="lngCenter"
+                    [zoom]="zoom"
+                    [disableDefaultUI]="false"
+                    [zoomControl]="false"
+                    (mapClick)="mapClicked($event)">
+                          
+                        <agm-marker 
+                            *ngFor="let establecimiento of establecimiento_response"
+                            (markerClick)="clickedMarker(establecimiento.name, i)"
+                            [latitude]="establecimiento.latitude"
+                            [longitude]="establecimiento.longitude"
+                            (dragEnd)="markerDragEnd(establecimiento, $event)">
+                                
+                                <agm-info-window>
+                                    <strong>{{establecimiento.name}}</strong>
+                                </agm-info-window> 
+                              
+                            </agm-marker>
+                            
+                            <agm-circle [latitude]="latCenter" [longitude]="lngCenter" 
+                                [radius]="slideRange"
+                                [fillColor]="'red'"
+                                [circleDraggable]="false"
+                                [editable]="false">
+                            </agm-circle>
+                            
+                          
+                </agm-map>
+            </div>
+            <div class="col"></div>
         </div>
         <div class="row" style="margin-top: 40px">
             <table class="table">
-                <tbody>
+                <tbody> 
                     <tr>
                         <th colspan="2" class="table-primary">Numero de Competidores</th>
                         <td>{{totalNumberOfCompetitor}}</td>
@@ -115,9 +95,30 @@
                         <th colspan="2" class="table-primary">Monto Trx</th>
                         <td>{{total_average_ticket}}</td>
                     </tr>
+               </tbody>
+            </table>
+       </div>
+        <div class="row" style="margin-top: 40px;">
+            <table class="table">
+                <thead>
+                    <tr class="table-primary">
+                        <th scope="col">#</th>
+                        <th scope="col">Establecimientos</th>
+                        <th scope="col">Distrito</th>
+                        <th scope="col">Ticket Promedio</th>
+                    </tr>
+                </thead>
+            <tbody>
+                    <tr *ngFor="let estableciminetos_list of establecimiento_response; let i = index">
+                        <th scope="row">{{i}}</th>
+                        <td>{{estableciminetos_list.name}}</td>
+                        <td>{{estableciminetos_list.district}}</td>
+                        <td>{{estableciminetos_list.averageTicket}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        
     </div>
     
 </div>

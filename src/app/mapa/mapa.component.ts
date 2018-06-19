@@ -15,10 +15,10 @@ import { Response } from '@angular/http';
 export class MapaComponent implements OnInit {
   
   // Configuracion para el mapa 
-  zoom: number = 12;
+  zoom: number = 10;
 
-  lat: number = -12.0431800;
-  lng: number =  -77.0282400;
+  latCenter: number;
+  lngCenter: number;
 
   // Establecimiento
   establecimientos: any;
@@ -76,6 +76,8 @@ export class MapaComponent implements OnInit {
   totalTransaction: any;
   total_average_ticket: any;
 
+  slideRange:any;
+
 
   constructor(private service: MapaServiceService) {}
 
@@ -83,13 +85,20 @@ export class MapaComponent implements OnInit {
     this.service.getEstableshment().subscribe(data => this.establecimientos = data);
   }
 
-  
-
   selectEstablecimientoChange(event){
+    this.latCenter = this.establecimientos.find(value => value.id == event).latitude;
+    this.lngCenter = this.establecimientos.find(value => value.id == event).longitude;
   }
 
-  searchMap(){
+  changeSlide(event){
+    this.slideRange = event * 1000;
+  }
 
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }  
+
+  searchMap(){
     let responseEstableshment = {
       establishment: this.selectEstablecimiento,
       distance: this.range_distance,
