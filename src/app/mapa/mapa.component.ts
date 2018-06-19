@@ -29,6 +29,9 @@ export class MapaComponent implements OnInit {
   // Rango en Similaridad
   range_similarity: any;
 
+  // active table and map 
+  activeTableMap: boolean = false;
+
   // Configuracion Rango
   someRange_distance: any = {
     behaviour: 'drag',
@@ -86,6 +89,7 @@ export class MapaComponent implements OnInit {
   }
 
   searchMap(){
+
     let responseEstableshment = {
       establishment: this.selectEstablecimiento,
       distance: this.range_distance,
@@ -108,6 +112,7 @@ export class MapaComponent implements OnInit {
       this.totalAmount = arrayTotalAmount.reduce((a,b) => a+b, 0);
       this.totalTransaction = arrayTotalTrx.reduce((a,b) => a+b, 0);
       this.total_average_ticket = arrayTotalAverageTicket.reduce((a,b) => a+b, 0);
+      this.activeTableMap = true;
     });
 
     
